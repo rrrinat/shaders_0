@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.screens.BirdScreen;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.WaveScreen;
 
@@ -36,7 +37,8 @@ public class MyShaders extends Game {
 
 
 		//setScreen(new GameScreen());
-		setScreen(new WaveScreen());
+		//setScreen(new WaveScreen());
+		setScreen(new BirdScreen());
 	}
 
 	@Override
