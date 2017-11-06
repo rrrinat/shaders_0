@@ -14,7 +14,7 @@ import com.mygdx.game.Env;
 /**
  * Created by rinat on 16.04.2016.
  */
-public class BirdScreen implements Screen {
+public class TextureSampling implements Screen {
 
     private SpriteBatch batch;
     private OrthographicCamera camera;
@@ -24,7 +24,7 @@ public class BirdScreen implements Screen {
 
     private ShaderProgram shader;
 
-    private Texture birdTexture;
+    private Texture grassTexture;
 
     @Override
     public void show() {
@@ -36,8 +36,8 @@ public class BirdScreen implements Screen {
         stage = new Stage(viewport, batch);
 
         ShaderProgram.pedantic = false;
-        shader = new ShaderProgram(Gdx.files.internal("shaders/bird.vert"),
-                Gdx.files.internal("shaders/bird.frag"));
+        shader = new ShaderProgram(Gdx.files.internal("shaders/inverted.vert"),
+                Gdx.files.internal("shaders/inverted.frag"));
 
         batch.setShader(shader);
 
@@ -45,7 +45,7 @@ public class BirdScreen implements Screen {
             Gdx.app.error("Shader", shader.getLog());
         }
 
-        birdTexture = new Texture("textures/bird.png");
+        grassTexture = new Texture("textures/grass.png");
 
         Gdx.input.setInputProcessor(stage);
 
@@ -59,7 +59,7 @@ public class BirdScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(birdTexture, 0, 0);
+        batch.draw(grassTexture, 300, 100);
         batch.end();
 
         // Update stage
@@ -95,7 +95,7 @@ public class BirdScreen implements Screen {
     @Override
     public void dispose() {
         // TODO Auto-generated method stub
-        birdTexture.dispose();
+        grassTexture.dispose();
         shader.dispose();
     }
 

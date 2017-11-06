@@ -43,6 +43,10 @@ public class WaveScreen implements Screen {
 
         batch.setShader(shader);
 
+        if (!shader.isCompiled()) {
+            Gdx.app.error("Shader", shader.getLog());
+        }
+
         resolution = new float[2];
 
         backgroundTexture = new Texture("textures/jungle-level.png");
@@ -73,6 +77,7 @@ public class WaveScreen implements Screen {
     public void resize(int width, int height) {
 
         viewport.update(width, height);
+
         resolution[0] = width;
         resolution[1] = height;
     }
@@ -98,7 +103,8 @@ public class WaveScreen implements Screen {
     @Override
     public void dispose() {
         // TODO Auto-generated method stub
-
+        backgroundTexture.dispose();
+        shader.dispose();
     }
 
 }

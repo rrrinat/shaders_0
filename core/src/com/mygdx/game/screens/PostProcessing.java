@@ -14,7 +14,7 @@ import com.mygdx.game.Env;
 /**
  * Created by rinat on 16.04.2016.
  */
-public class BirdScreen implements Screen {
+public class PostProcessing implements Screen {
 
     private SpriteBatch batch;
     private OrthographicCamera camera;
@@ -24,7 +24,9 @@ public class BirdScreen implements Screen {
 
     private ShaderProgram shader;
 
-    private Texture birdTexture;
+    private Texture backgroundTexture;
+
+    private float resolution[];
 
     @Override
     public void show() {
@@ -36,8 +38,8 @@ public class BirdScreen implements Screen {
         stage = new Stage(viewport, batch);
 
         ShaderProgram.pedantic = false;
-        shader = new ShaderProgram(Gdx.files.internal("shaders/bird.vert"),
-                Gdx.files.internal("shaders/bird.frag"));
+        shader = new ShaderProgram(Gdx.files.internal("shaders/lesson3.vert"),
+                Gdx.files.internal("shaders/lesson3.frag"));
 
         batch.setShader(shader);
 
@@ -45,7 +47,9 @@ public class BirdScreen implements Screen {
             Gdx.app.error("Shader", shader.getLog());
         }
 
-        birdTexture = new Texture("textures/bird.png");
+        resolution = new float[2];
+
+        backgroundTexture = new Texture("textures/background.png");
 
         Gdx.input.setInputProcessor(stage);
 
@@ -59,7 +63,8 @@ public class BirdScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(birdTexture, 0, 0);
+        shader.setUniform2fv("resolution", resolution , 0, 2);
+        batch.draw(backgroundTexture, 0, 0);
         batch.end();
 
         // Update stage
@@ -72,6 +77,9 @@ public class BirdScreen implements Screen {
     public void resize(int width, int height) {
 
         viewport.update(width, height);
+
+        resolution[0] = width;
+        resolution[1] = height;
     }
 
     @Override
@@ -95,7 +103,7 @@ public class BirdScreen implements Screen {
     @Override
     public void dispose() {
         // TODO Auto-generated method stub
-        birdTexture.dispose();
+        backgroundTexture.dispose();
         shader.dispose();
     }
 

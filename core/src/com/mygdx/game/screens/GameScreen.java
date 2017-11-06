@@ -41,6 +41,10 @@ public class GameScreen implements Screen {
 
         batch.setShader(shader);
 
+        if (!shader.isCompiled()) {
+            Gdx.app.error("Shader", shader.getLog());
+        }
+
         quadTexture = new Texture("textures/quad.png");
 
         Gdx.input.setInputProcessor(stage);
@@ -91,7 +95,8 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         // TODO Auto-generated method stub
-
+        quadTexture.dispose();
+        shader.dispose();
     }
 
 }
