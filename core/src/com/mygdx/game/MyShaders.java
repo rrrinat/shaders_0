@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.screens.BirdScreen;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.PostProcessing;
+import com.mygdx.game.screens.SinusGlow;
 import com.mygdx.game.screens.TextureSampling;
 import com.mygdx.game.screens.WaveScreen;
 
@@ -43,9 +44,10 @@ public class MyShaders extends Game {
 
 		//screen = new BirdScreen();
 		//screen = new GameScreen();
-		screen = new PostProcessing();
+		//screen = new PostProcessing();
 		//screen = new TextureSampling();
 		//screen = new WaveScreen();
+		screen = new SinusGlow();
 
 		setScreen(screen);
 	}
